@@ -1,13 +1,20 @@
-  ####################################################
-  # Created:   	  May 12, 2015
-  # By: 			    Thomas de Graaff
-  # For: 			    Social Interaction and Crime paper
-  # Last edited: 	October 18, 2015
-  ####################################################
-  
-  ####################################################
-  # System parameters and packages 
-  ####################################################
+---
+title: "Output example"
+author: "Thomas de Graaff"
+date: "October 19, 2015"
+output: html_document
+---
+
+## Introduction
+
+This progress report gives output for all crime of the whole population
+
+## Preamble 
+
+First, we need to read in packages, my own functions and the two datasets
+
+```{r results='hide', message=FALSE, warning=FALSE}
+setwd("C:/Users/tgf200/Dropbox/Thomas/papers/Crime")
   library("dplyr")
   library("tidyr")
   library("foreign")
@@ -21,10 +28,8 @@
   source("./prog/R/CharacteristicsEq.R")
   source("./prog/R/MakeFig.R")
   source("./prog/R/FindEquilibria.R")
-  ####################################################
-  # Choose crimetype ("crime", "property" or "violent")
-  ####################################################
-  cr <- "crime"
+
+cr <- "crime"
   ####################################################
   # Choose whether estimation for only the youth
   ####################################################  
@@ -69,22 +74,11 @@
   data_total <- data %>% filter(is.na(alpha))
   data_total$alpha <- na.fill(data_total$alpha,-3.5)
   data_total$se <- na.fill(data_total$se, 1)  
-  ####################################################
-  # Spatial IV--only to check the spatial instrument once.
-  # Not necessary for the rest of the application
-  ####################################################
-  #   formcrime <- alpha~addrdens + oneperdens + oneparentdens+
-  #     perperhh + opleiding + socklasse + k_tweeverd + 
-  #     v_uit_perc + v_in_perc + schooldens + perchouseown + shops + polavail_mean_2005+pfield+interaction |
-  #     addrdens + oneperdens + oneparentdens +
-  #     perperhh + opleiding + socklasse + k_tweeverd + v_uit_perc + v_in_perc + 
-  #     schooldens + perchouseown + shops + polavail_mean_2005 + 
-  #     Lagpfieldcrime1 + Lagpfieldcrime2 + Lagpfieldcrime1* addrdens + Lagpfieldcrime2* addrdens
-  #   summary(ivreg(formula=formcrime, data = data, weights = 1/se))
-  ####################################################
-  # Fill in specification of model
-  # Depending on own specification
-  ####################################################
+```
+
+## We then specify the specifications: 
+
+```{r results='hide', message=FALSE, warning=FALSE}
   forminit  <- alpha~addrdens + oneperdens +oneparentdens +
     perperhh + opleiding + socklasse + k_tweeverd + 
     v_uit_perc + v_in_perc + schooldens + perchouseown + shops + polavail_mean_2005+pfield+interaction
@@ -140,66 +134,45 @@
   dataindividual$foreign <- as.numeric(dataindividual$directions.foreign) - 1
   dataindividual_j$directions.foreign <- factor(dataindividual_j$foreign)
   dataindividual_j$foreign <- as.numeric(dataindividual_j$directions.foreign) - 1
-  ####################################################
-  # call functions to function iteration2sls()
-  # to estimate the 2SLS procedure
-  ####################################################
-  if (youth) {
-    if (mun) {
-      output <- iteration2sls(dataindividual_j, data, data_total, formcrimemun, forminitmun, formhelprq1mun, formhelprq2mun, formrqmun, youth=TRUE, initvalue=0)
-      summary(output$iv)
-      # summary(output$rqout)      
-    } else { 
-      output <- iteration2sls(dataindividual_j, data, data_total, formcrime, forminit, formhelprq1, formhelprq2, formrq, youth=TRUE, initvalue=0)
-      summary(output$iv)
-      # summary(output$rqout)      
-    }
-  } else {
-    if (mun) {
-      output <- iteration2sls(dataindividual, data, data_total, formcrimemun, forminitmun, formhelprq1mun, formhelprq2mun, formrqmun, youth=FALSE, initvalue=0)
-      summary(output$iv)
-      # summary(output$rqout)      
-    } else { 
+```
+
+## And then the estimation procedure:
+
+```{r}
       output <- iteration2sls(dataindividual, data, data_total, formcrime, forminit, formhelprq1, formhelprq2, formrq, youth=FALSE, initvalue=0)
       summary(output$iv)
-      # summary(output$rqout)
-    }
-  }
-  #####################################################
-  # make figure
-  #####################################################
-  myplot <- makefig(output)
-  pdf("./Paper/Version4/img/equilibriaTemp.pdf")
-  myplot
-  dev.off()
-  ####################################################
-  # Find all equilibria
-  # And other outcome characteristics
-  ####################################################
-  #   matrices <- findequilibria(output)
-  #   counteq(matrices$cmat)
-  #   counteqlow(output$instrument)
-  #   percclose(datatemp$pfield, output$instrument, 0.025)
-  ####################################################
-  # Simulation with initial values
-  # check whehter initial values make an impact
-  # Be careful; time consuming (> 5 minutes)
-  ####################################################
-  #       values <- seq(0, 1, 0.02)
-  #     coefvector <- 0
-  #     for (i in values){
-  #       output <- iteration2sls(dataindividual_j, data, data_total, formcrime, forminit, formhelprq1, formhelprq2, formrq, youth=TRUE, initvalue=i)
-  #       coefvector <- rbind(coefvector, output$iv$coefficients["pfield"])
-  #     }
-  #     coefvector <- coefvector[-1]
-  #     dataplot <- data.frame(values, coefvector)
-  #     p <- ggplot(data=dataplot, aes(x = values, y = coefvector))  +geom_point(shape = 1) +
-  #       geom_smooth(method = "lm", formula = y~x, se = FALSE, colour = "black") + 
-  #       scale_y_continuous(breaks = seq(0, 0.5, 0.00001), limits = c(0.1108,0.1109)) +
-  #       labs(x = "Initial value of gamma", y = "Final estimation of gamma") + 
-  #       theme_bw() +
-  #       theme(panel.grid.minor = element_blank(),
-  #             plot.title = element_text(size = rel(1.5), face = "bold", vjust = 1.5))
-  #     pdf("./Paper/Version4/img/initialvalues.pdf")
-  #     p
-  #     dev.off()
+```
+
+## With final analysis of the output
+
+We first want to find all equilibria for all iterations
+
+```{r}
+matrices <- findequilibria(output)
+```
+
+Then we want to find the percentages of 3 equilibra occuring per iteration
+
+```{r}
+counteq(matrices$cmat)
+```
+
+Then we want to know the number of low equiblibra (smaller than 50%). This also indicates the number of equilibria changing from low to high (larger than 50%)
+
+```{r}
+counteqlow(output$instrument)
+```
+
+And finally, we want to know whether our found equilibria are close (in this case the difference should be smaller than 2.5% in an absolute sence) to the real crime rates
+
+```{r}
+percclose(datatemp$pfield, output$instrument, 0.025)
+```
+## Figure equilibria
+
+And finally, we end with a figure of the equilibria, which for this case is not very exiting.
+```{r}
+makefig(output)
+```
+
+

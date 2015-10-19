@@ -42,7 +42,6 @@ percclose <- function(cr, mat, epsilon) {
   fun <- function(x) sum (abs(x)<=epsilon)
   vec <- apply(mattemp, 1, fun)
   return(vec/ncol(mat))
-  
 }
 
 perceqlower <- function(cr, mat) {
@@ -60,5 +59,4 @@ perceqlower <- function(cr, mat) {
   fun <- function(x) sum (x>0)
   vec <- apply(mattemp, 1, fun)
   return(vec/ncol(mat))
-  
 }
