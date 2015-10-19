@@ -10,4 +10,7 @@ The files provided here are:
 - `IteractionBayser.R`: core code file that calculates the intruments for each neighborhood and for each interation. 
 - `makefig.R`: Creates neighborhood-specific logit plots (sigmoids);
 - `CharacteristicsEq.R`: provides various characteristics of the equilibria;
-- `FindEquilibria.R`: finds all equilibria (1 or 3) for each neighborhood and iteration. 
+- `FindEquilibria.R`: finds all equilibria (1 or 3) for each neighborhood and iteration;
+- `OutputExample.Rmd`: `R` markdown file combining code and output;
+- `OutputExample.html`: Example code and output in `html`;
+- `OutputExample.pfd`: Example code and output in `pfd`.
