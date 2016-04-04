@@ -1,8 +1,10 @@
   ####################################################
-  # Created:   	  May 12, 2015
-  # By: 			    Thomas de Graaff
-  # For: 			    Social Interaction and Crime paper
-  # Last edited: 	October 18, 2015
+  # Created:   	  April 04, 2016
+  # By: 		  Thomas de Graaff
+  # For: 		  Social Interaction and Crime paper
+  # Last edited:  April 04, 2016
+  # Description:  Estimates social interaction with 
+  #               crime rates fixed
   ####################################################
   
   ####################################################
@@ -17,7 +19,7 @@
   library("reshape2")
   library("quantreg")
   library("zoo")
-  source("./prog/R/iterationBayer.R")
+  source("./prog/R/iterationDirectIV.R")
   source("./prog/R/CharacteristicsEq.R")
   source("./prog/R/MakeFig.R")
   source("./prog/R/FindEquilibria.R")
