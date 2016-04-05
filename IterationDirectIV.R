@@ -87,7 +87,10 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
     datahat_temp <- datahat_temp %>% group_by(pc4) %>% summarize(hatpc4=weighted.mean(hat1,frequency))
     phi <- datahat_temp$hatpc4 + datahat$alphahat_new
     instrument_eq <- exp(phi)/(1+exp(phi))
-    datahat$instrument <- 1 * instrument_eq + 0 * datahat$instrument
+    # We let the instrument converge very slowly to avoid "overshooting"
+    # This only happens in the strange situation when gamma is negative 
+    # which in our case happens for property crime with neighbourhood variables and the total sample
+    datahat$instrument <- 0.25 * instrument_eq + 0.75 * datahat$instrument
     criterium1 <- sum((instrument_old - instrument_eq)^2, na.rm=TRUE)
     instrument_old <- instrument_eq
     print(paste("Criterium value is now : ", criterium1))

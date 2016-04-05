@@ -26,11 +26,11 @@
   ####################################################
   # Choose crimetype ("crime", "property" or "violent")
   ####################################################
-  cr <- "crime"
+  cr <- "property"
   ####################################################
   # Choose whether estimation for only the youth
   ####################################################  
-  youth <- 0
+  youth <- 1
   ####################################################
   # Choose whether only for municipality averages
   ####################################################   
@@ -39,16 +39,16 @@
   # Read and manipulate data (still manual selection!)
   ####################################################
   datatemp <- 0
-    if (youth) {
+  if (youth) {
     data <- read.csv("./Data/Thomas_data_PC4_crime_youth.csv", header=TRUE, sep = ",")
   } else {
     data <- read.csv("./Data/Thomas_data_PC4_crime.csv", header=TRUE, sep = ",")
   }
   data <- data %>%  # fill in crime type
-            mutate(pfield = pfieldcrime, 
+            mutate(pfield = pfieldproperty, 
                    interaction = pfield * addrdens,
-                   alpha = alpha_crime,
-                   se = sealpha_crime
+                   alpha = alpha_property,
+                   se = sealpha_property
                    ) %>%
                    filter(!is.na(pfield))
   dataindividual <- read.dta(paste0("./Data/hat_any",cr,"2006.dta"))
@@ -167,7 +167,7 @@
       # summary(output$rqout)
     }
   }
-  #####################################################
+  ####################################################
   # make figure
   #####################################################
   myplot <- makefig(output)
