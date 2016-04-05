@@ -72,7 +72,7 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
   addresdensity <<- datahat$addrdens
   postcode <<- datahat$pc4
   ########################################################################################
-  # Start Iteraction
+  # Start iteration
   ########################################################################################  
   while(criterium1 > 0.000001) {
     datahat$instrinter = datahat$instrument * datahat$addrdens

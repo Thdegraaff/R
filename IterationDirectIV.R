@@ -72,7 +72,7 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
   addresdensity <<- datahat$addrdens
   postcode <<- datahat$pc4
   ########################################################################################
-  # Start Iteration
+  # Start iteration
   ########################################################################################  
   while(criterium1 > 0.000001) {
     datahat$instrinter = datahat$instrument * datahat$addrdens
@@ -81,19 +81,12 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
     instrument_eq <- datahat$instrument  
     
     datahat$alphahat_new <- alphahat - coef(iv)["pfield"]*datahat$pfield - coef(iv)["interaction"]*datahat$interaction
+    datahat$alphahat <- datahat$alphahat + initvalue*datahat$pfield + initvalue*datahat$interaction 
     datahat_temp <- left_join(datahat, dataind, by="pc4")
     datahat_temp <- select(datahat_temp, pc4, hat, hat1, frequency, alphahat_new, totalpop)
     datahat_temp <- datahat_temp %>% group_by(pc4) %>% summarize(hatpc4=weighted.mean(hat1,frequency))
     phi <- datahat_temp$hatpc4 + datahat$alphahat_new
-    temp <- coef(iv)["pfield"]*100 + coef(iv)["interaction"]*100*datahat$addrdens
-    for (i in 1:length(alphahat)) {
-      fun <- function(x) (x - exp(phi[i]+temp[i]*x)/(1+exp(phi[i]+temp[i]*x)))
-      uni <- uniroot.all(fun, c(0, 1)) # Make use of the awesome rootSolve package!!
-      if (length(uni)==0) {
-        uni <- 1
-      }
-        instrument_eq[i] <- min(uni)
-      }
+    instrument_eq <- exp(phi)/(1+exp(phi))
     datahat$instrument <- 1 * instrument_eq + 0 * datahat$instrument
     criterium1 <- sum((instrument_old - instrument_eq)^2, na.rm=TRUE)
     instrument_old <- instrument_eq
@@ -117,19 +110,13 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
   alphahat <- predict(iv,datatot)
   instrument_eq <- datatot$instrument
   datatot$alphahat_new <- alphahat - coef(iv)["pfield"]*datatot$pfield - coef(iv)["interaction"]*datatot$interaction
+  datahat$alphahat <- datahat$alphahat + initvalue*datahat$pfield + initvalue*datahat$interaction   
   datatot_temp <- left_join(datatot, dataind, by="pc4")
   datatot_temp <- select(datatot_temp, pc4, hat, hat1, frequency, alphahat_new, totalpop)
   datatot_temp <- datatot_temp %>% group_by(pc4) %>% summarize(hatpc4=weighted.mean(hat1,frequency))
   phi <- datatot_temp$hatpc4 + datatot$alphahat_new
   temp <- coef(iv)["pfield"]*100 + coef(iv)["interaction"]*100*datatot$addrdens
-  for (i in 1:length(alphahat)) {
-    fun <- function(x) (x - exp(phi[i]+temp[i]*x)/(1+exp(phi[i]+temp[i]*x)))
-    uni <- uniroot.all(fun, c(0, 1))
-    if (length(uni)==0) {
-      uni <- 1
-    }
-    instrument_eq[i] <- min(uni)
-  }
+  instrument_eq <- exp(phi)/(1+exp(phi))
   datatot$instrument <- instrument_eq
   datatot$instrinter <- datatot$instrument * datatot$addrdens
   datahat <- bind_rows(datahat, datatot) 
