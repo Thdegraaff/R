@@ -32,7 +32,7 @@
   ####################################################
   # Choose whether only for municipality averages
   ####################################################   
-  mun <- 1
+  mun <- 0
   ####################################################
   # Read and manipulate data (still manual selection!)
   ####################################################
@@ -160,7 +160,7 @@
       summary(output$iv)
       # summary(output$rqout)      
     } else { 
-      output <- iteration2sls(dataindividual, data, data_total, formcrime, forminit, formhelprq1, formhelprq2, formrq, youth=FALSE, initvalue=0)
+      output <- iteration2sls(dataindividual, data, data_total, formcrime, forminit, formhelprq1, formhelprq2, formrq, youth=FALSE, initvalue=1)
       summary(output$iv)
       # summary(output$rqout)
     }

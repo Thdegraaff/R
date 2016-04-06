@@ -90,7 +90,7 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
     # We let the instrument converge very slowly to avoid "overshooting"
     # This only happens in the strange situation when gamma is negative 
     # which in our case happens for property crime with neighbourhood variables and the total sample
-    datahat$instrument <- 0.25 * instrument_eq + 0.75 * datahat$instrument
+    datahat$instrument <- 1 * instrument_eq + 0 * datahat$instrument
     criterium1 <- sum((instrument_old - instrument_eq)^2, na.rm=TRUE)
     instrument_old <- instrument_eq
     print(paste("Criterium value is now : ", criterium1))
