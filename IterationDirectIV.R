@@ -121,6 +121,9 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
   temp <- coef(iv)["pfield"]*100 + coef(iv)["interaction"]*100*datatot$addrdens
   instrument_eq <- exp(phi)/(1+exp(phi))
   datatot$instrument <- instrument_eq
+  # report the implied mean for missing crime rate as requested by referees
+  print(paste("The implied value for missing crime rate is:", mean(datatot$instrument)))
+  print(paste("The implied value for non-missing crime rate is:", mean(datahat$instrument)))
   datatot$instrinter <- datatot$instrument * datatot$addrdens
   datahat <- bind_rows(datahat, datatot) 
   ########################################################################################

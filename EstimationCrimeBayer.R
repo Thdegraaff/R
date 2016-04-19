@@ -148,7 +148,7 @@
     if (mun) {
       output <- iteration2sls(dataindividual_j, data, data_total, formcrimemun, forminitmun, formhelprq1mun, formhelprq2mun, formrqmun, youth=TRUE, initvalue=0)
       summary(output$iv)
-      # summary(output$rqout)      
+      #summary(output$rqout)      
     } else { 
       output <- iteration2sls(dataindividual_j, data, data_total, formcrime, forminit, formhelprq1, formhelprq2, formrq, youth=TRUE, initvalue=0)
       summary(output$iv)
