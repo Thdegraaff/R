@@ -152,7 +152,7 @@
     } else { 
       output <- iteration2sls(dataindividual_j, data, data_total, formcrime, forminit, formhelprq1, formhelprq2, formrq, youth=TRUE, initvalue=0)
       summary(output$iv)
-      # summary(output$rqout)      
+      #summary(output$rqout)      
     }
   } else {
     if (mun) {
