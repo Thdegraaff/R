@@ -125,7 +125,6 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
   datatot_temp <- select(datatot_temp, pc4, hat, hat1, frequency, alphahat_new, totalpop)
   datatot_temp <- datatot_temp %>% group_by(pc4) %>% summarize(hatpc4=weighted.mean(hat1,frequency))
   phi <- datatot_temp$hatpc4 + datatot$alphahat_new
-  print(phi)
   temp <- coef(iv)["pfield"]*100 + coef(iv)["interaction"]*100*datatot$addrdens
   for (i in 1:length(alphahat)) {
     fun <- function(x) (x - exp(phi[i]+temp[i]*x)/(1+exp(phi[i]+temp[i]*x)))
@@ -135,14 +134,13 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
     }
     instrument_eq[i] <- min(uni)
   }
-  print(instrument_eq)
   datatot$instrument <- instrument_eq 
   
     # report the implied mean for missing crime rate as requested by referees
   print(paste("The implied instrument for missing crime rate is:", mean(datatot$instrument)))
   print(paste("The implied instrument for non-missing crime rate is:", mean(datahat$instrument)))
   datatot$instrinter <- datatot$instrument * datatot$addrdens
-  datahat <- bind_rows(datahat, datatot) 
+  datahat <- bind_rows(datahat, datatot)
   ########################################################################################
   # Quantile IV regression where datahat now exists of imputed values as well
   ########################################################################################
