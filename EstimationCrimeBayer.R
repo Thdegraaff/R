@@ -2,7 +2,7 @@
   # Created:   	  May 12, 2015
   # By: 			    Thomas de Graaff
   # For: 			    Social Interaction and Crime paper
-  # Last edited: 	October 18, 2015
+  # Last edited: 	April 20, 2016
   ####################################################
   
   ####################################################
@@ -28,7 +28,7 @@
   ####################################################
   # Choose whether estimation for only the youth
   ####################################################  
-  youth <- 1
+  youth <- 0
   ####################################################
   # Choose whether only for municipality averages
   ####################################################   
@@ -147,21 +147,21 @@
   if (youth) {
     if (mun) {
       output <- iteration2sls(dataindividual_j, data, data_total, formcrimemun, forminitmun, formhelprq1mun, formhelprq2mun, formrqmun, youth=TRUE, initvalue=0)
-      summary(output$iv)
+      summary(output$iv, diagnostics = TRUE)
       #summary(output$rqout)      
     } else { 
       output <- iteration2sls(dataindividual_j, data, data_total, formcrime, forminit, formhelprq1, formhelprq2, formrq, youth=TRUE, initvalue=0)
-      summary(output$iv)
+      summary(output$iv, diagnostics = TRUE)
       #summary(output$rqout)      
     }
   } else {
     if (mun) {
       output <- iteration2sls(dataindividual, data, data_total, formcrimemun, forminitmun, formhelprq1mun, formhelprq2mun, formrqmun, youth=FALSE, initvalue=0)
-      summary(output$iv)
+      summary(output$iv, diagnostics = TRUE)
       # summary(output$rqout)      
     } else { 
       output <- iteration2sls(dataindividual, data, data_total, formcrime, forminit, formhelprq1, formhelprq2, formrq, youth=FALSE, initvalue=1)
-      summary(output$iv)
+      summary(output$iv, diagnostics = TRUE)
       # summary(output$rqout)
     }
   }

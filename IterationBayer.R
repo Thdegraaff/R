@@ -44,6 +44,58 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
   ols<-lm(formula=formols, data = datahat, weights = 1/se)
   print(summary(ols))
   ########################################################################################
+  # Run straighforward IV on aggregate individual and neighborhood characteristics
+  ########################################################################################  
+  datahat_iv <- left_join(datahat, dataind, by="pc4")
+  levels(datahat_iv$age20cat)[1] <- "4"
+  levels(datahat_iv$age20cat)[2] <- "9"
+  levels(datahat_iv$age20cat)[3] <- "14"
+  levels(datahat_iv$age20cat)[4] <- "19"
+  levels(datahat_iv$age20cat)[5] <- "24"
+  levels(datahat_iv$age20cat)[6] <- "29"
+  levels(datahat_iv$age20cat)[7] <- "34"
+  levels(datahat_iv$age20cat)[8] <- "39"
+  levels(datahat_iv$age20cat)[9] <- "44"
+  levels(datahat_iv$age20cat)[10] <- "49"
+  levels(datahat_iv$age20cat)[11] <- "54"
+  levels(datahat_iv$age20cat)[12] <- "59"
+  levels(datahat_iv$age20cat)[13] <- "64"
+  levels(datahat_iv$age20cat)[14] <- "69"
+  levels(datahat_iv$age20cat)[15] <- "74"
+  levels(datahat_iv$age20cat)[16] <- "84"
+  levels(datahat_iv$age20cat)[17] <- "89"
+  levels(datahat_iv$age20cat)[18] <- "94"
+  levels(datahat_iv$age20cat)[19] <- "99"
+  datahat_iv <- datahat_iv %>% select(pc4, male, foreign, age20cat, frequency, totalpop) %>%
+                  mutate(frequency = frequency/totalpop) %>%
+                  unite(MaleForeignAgecategory, male, foreign, age20cat) %>%
+                  group_by(pc4,MaleForeignAgecategory) %>% 
+                  summarize(frequency = sum(frequency)) %>%
+                  spread(MaleForeignAgecategory,frequency)
+  datahat_iv <- left_join(datahat, datahat_iv, by = "pc4")
+  datahat_iv$maleint <- datahat_iv$interaction *datahat_iv$male_1_19
+  iv_simple<-ivreg(alpha~addrdens + oneperdens + oneparentdens+
+                     perperhh + opleiding + socklasse + k_tweeverd + 
+                     v_uit_perc + v_in_perc + schooldens + perchouseown + shops + polavail_mean_2005+pfield +interaction|
+                     addrdens + oneperdens + oneparentdens +
+                     perperhh + opleiding + socklasse + k_tweeverd + v_uit_perc + v_in_perc + 
+                     schooldens + perchouseown + shops + polavail_mean_2005 + 
+                     #female_1_14 + female_1_19 + female_1_24 + female_1_29 + female_1_34 + female_1_39 +
+                     #female_1_44 + female_1_49 + female_1_54 + female_1_59 + female_1_64 + female_1_69 +
+                     #female_0_14 + female_0_19 + female_0_24 + female_0_29 + female_0_34 + female_0_39 +
+                     #female_0_44 + female_0_49 + female_0_54 + female_0_59 + female_0_64 + female_0_69 +                     
+                     male_1_19 +
+                     #female_1_14 * interaction + female_1_19  * interaction+ female_1_24  * interaction + 
+                     #female_1_29 * interaction+ female_1_34  * interaction+ female_1_39  * interaction +
+                     #female_1_44 * interaction+ female_1_49  * interaction+ female_1_54  * interaction+ 
+                     #female_1_59  * interaction+ female_1_64  * interaction+ female_1_69  * interaction+
+                     #male_1_19 * interaction + male_1_24 * interaction + male_1_24 * interaction +
+                     #male_0_14 * interaction + male_0_19 * interaction + male_0_19 * interaction
+                     maleint
+                   ,
+                     data = datahat_iv, weights = 1/se)
+  print(summary(iv_simple, diagnostics = TRUE))
+  ########################################################################################
   # Specific for all or for youth only (age2 disappears for the latter)
   ########################################################################################    
   datahat$alphahat <- ols$fitted.values
@@ -54,7 +106,7 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
   datahat_temp$instrument <- exp(datahat_temp$hat1+datahat_temp$alphahat)/(1+exp(datahat_temp$hat1+datahat_temp$alphahat))
   datahat_temp <- datahat_temp %>% group_by(pc4) %>% summarize(instrument = weighted.mean(instrument,frequency), hatpc4=mean(hat1))
   datahat <- left_join(datahat_temp, data, by="pc4")
-  datahat <- select(datahat, pc4, alpha, se, addrdens, oneperdens,oneparentdens, 
+  datahat <- select(datahat, pc4, alpha, se, addrdens, oneperdens,oneparentdens, hatpc4,
                     perperhh, opleiding, 
                     socklasse,k_tweeverd, v_uit_perc, v_in_perc,
                     schooldens, perchouseown, shops, polavail_mean_2005, pfield, interaction, instrument,
