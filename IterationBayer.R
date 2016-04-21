@@ -189,8 +189,10 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
   datatot$instrument <- instrument_eq 
   
     # report the implied mean for missing crime rate as requested by referees
-  print(paste("The implied instrument for missing crime rate is:", mean(datatot$instrument)))
-  print(paste("The implied instrument for non-missing crime rate is:", mean(datahat$instrument)))
+  phi <- datatot_temp$hatpc4 - 3.5
+  ImpliedCrimeRate <- exp(phi)/(1+exp(phi))
+  print(paste("The implied crime rate for missing neighborhood fixed efffects is:", mean(ImpliedCrimeRate)))
+  
   datatot$instrinter <- datatot$instrument * datatot$addrdens
   datahat <- bind_rows(datahat, datatot)
   ########################################################################################
