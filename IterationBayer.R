@@ -73,25 +73,27 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
                   summarize(frequency = sum(frequency)) %>%
                   spread(MaleForeignAgecategory,frequency)
   datahat_iv <- left_join(datahat, datahat_iv, by = "pc4")
-  datahat_iv$maleint <- datahat_iv$interaction *datahat_iv$male_1_19
+  datahat_iv <- datahat_iv %>% mutate(
+                    female =  female_1_14 + female_1_19 + female_1_24 + female_1_29 + female_1_34 + female_1_39 +
+                              female_1_44 + female_1_49 + female_1_54 + female_1_59 + female_1_64 + female_1_69 +
+                              female_0_14 + female_0_19 + female_0_24 + female_0_29 + female_0_34 + female_0_39 +
+                              female_0_44 + female_0_49 + female_0_54 + female_0_59 + female_0_64 + female_0_69, 
+                    foreign = female_1_14 + female_1_19 + female_1_24 + female_1_29 + female_1_34 + female_1_39 +
+                              female_1_44 + female_1_49 + female_1_54 + female_1_59 + female_1_64 + female_1_69 +  
+                              male_1_14 + male_1_19 + male_1_24 + male_1_29 + male_1_34 + male_1_39 +
+                              male_1_44 + male_1_49 + male_1_54 + male_1_59 + male_1_64 + male_1_69, 
+                    young   = male_0_19 + male_1_19 + female_0_19 + female_1_19,
+                    female_int = female * interaction,
+                    foreign_int = foreign * interaction,
+                    young_int = young * interaction
+                    )
   iv_simple<-ivreg(alpha~addrdens + oneperdens + oneparentdens+
                      perperhh + opleiding + socklasse + k_tweeverd + 
                      v_uit_perc + v_in_perc + schooldens + perchouseown + shops + polavail_mean_2005+pfield +interaction|
                      addrdens + oneperdens + oneparentdens +
                      perperhh + opleiding + socklasse + k_tweeverd + v_uit_perc + v_in_perc + 
                      schooldens + perchouseown + shops + polavail_mean_2005 + 
-                     #female_1_14 + female_1_19 + female_1_24 + female_1_29 + female_1_34 + female_1_39 +
-                     #female_1_44 + female_1_49 + female_1_54 + female_1_59 + female_1_64 + female_1_69 +
-                     #female_0_14 + female_0_19 + female_0_24 + female_0_29 + female_0_34 + female_0_39 +
-                     #female_0_44 + female_0_49 + female_0_54 + female_0_59 + female_0_64 + female_0_69 +                     
-                     male_1_19 +
-                     #female_1_14 * interaction + female_1_19  * interaction+ female_1_24  * interaction + 
-                     #female_1_29 * interaction+ female_1_34  * interaction+ female_1_39  * interaction +
-                     #female_1_44 * interaction+ female_1_49  * interaction+ female_1_54  * interaction+ 
-                     #female_1_59  * interaction+ female_1_64  * interaction+ female_1_69  * interaction+
-                     #male_1_19 * interaction + male_1_24 * interaction + male_1_24 * interaction +
-                     #male_0_14 * interaction + male_0_19 * interaction + male_0_19 * interaction
-                     maleint
+                     female + female_int 
                    ,
                      data = datahat_iv, weights = 1/se)
   print(summary(iv_simple, diagnostics = TRUE))
