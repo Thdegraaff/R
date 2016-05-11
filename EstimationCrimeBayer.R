@@ -41,7 +41,7 @@
     data <- read.csv("./Data/Thomas_data_PC4_crime_youth.csv", header=TRUE, sep = ",")
   } else {
     data <- read.csv("./Data/Thomas_data_PC4_crime.csv", header=TRUE, sep = ",")
-  }
+  } 
   data <- data %>%  # fill in crime type
             mutate(pfield = pfieldcrime, 
                    interaction = pfield * addrdens,

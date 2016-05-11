@@ -83,7 +83,22 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
                               male_1_14 + male_1_19 + male_1_24 + male_1_29 + male_1_34 + male_1_39 +
                               male_1_44 + male_1_49 + male_1_54 + male_1_59 + male_1_64 + male_1_69, 
                     young   = male_0_19 + male_1_19 + female_0_19 + female_1_19,
+                    meanage = (male_0_14 + male_1_14 + female_0_14 + female_1_14)*13 + 
+                              (male_0_19 + male_1_19 + female_0_19 + female_1_19)*17 + 
+                              (male_0_24 + male_1_24 + female_0_24 + female_1_24)*22 + 
+                              (male_0_29 + male_1_29 + female_0_29 + female_1_29)*27 + 
+                              (male_0_34 + male_1_34 + female_0_34 + female_1_34)*32 + 
+                              (male_0_39 + male_1_39 + female_0_39 + female_1_39)*37 + 
+                              (male_0_44 + male_1_44 + female_0_44 + female_1_44)*42 + 
+                              (male_0_49 + male_1_49 + female_0_49 + female_1_49)*47 + 
+                              (male_0_54 + male_1_54 + female_0_54 + female_1_54)*52 + 
+                              (male_0_59 + male_1_59 + female_0_59 + female_1_59)*57 + 
+                              (male_0_64 + male_1_64 + female_0_64 + female_1_64)*62 + 
+                              (male_0_69 + male_1_69 + female_0_69 + female_1_69)*67, 
+                    meanage_int = meanage * interaction,
                     female_int = female * interaction,
+                    sumagefemale = meanage + female, 
+                    sum_int = meanage_int + female_int,
                     foreign_int = foreign * interaction,
                     young_int = young * interaction
                     )
@@ -93,7 +108,11 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
                      addrdens + oneperdens + oneparentdens +
                      perperhh + opleiding + socklasse + k_tweeverd + v_uit_perc + v_in_perc + 
                      schooldens + perchouseown + shops + polavail_mean_2005 + 
-                     female + female_int 
+                     #sumagefemale + sum_int
+                     #meanage + meanage_int + 
+                     #female + female_int #+ 
+                     #young + young_int + 
+                     foreign + foreign_int
                    ,
                      data = datahat_iv, weights = 1/se)
   print(summary(iv_simple, diagnostics = TRUE))
