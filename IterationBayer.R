@@ -95,6 +95,8 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
                               (male_0_59 + male_1_59 + female_0_59 + female_1_59)*57 + 
                               (male_0_64 + male_1_64 + female_0_64 + female_1_64)*62 + 
                               (male_0_69 + male_1_69 + female_0_69 + female_1_69)*67, 
+                    instr_alter = exp(female + meanage/100 + oneparentdens)/(1 + exp(female + meanage/100 + oneparentdens)),
+                    instr_alter_int = instr_alter*interaction,
                     meanage_int = meanage * interaction,
                     female_int = female * interaction,
                     sumagefemale = meanage + female, 
@@ -112,7 +114,7 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
                      #meanage + meanage_int + 
                      #female + female_int #+ 
                      #young + young_int + 
-                     foreign + foreign_int
+                     instr_alter + instr_alter_int
                    ,
                      data = datahat_iv, weights = 1/se)
   print(summary(iv_simple, diagnostics = TRUE))

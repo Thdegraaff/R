@@ -24,7 +24,7 @@
   ####################################################
   # Choose crimetype ("crime", "property" or "violent")
   ####################################################
-  cr <- "crime"
+  cr <- "violent"
   ####################################################
   # Choose whether estimation for only the youth
   ####################################################  
@@ -43,10 +43,10 @@
     data <- read.csv("./Data/Thomas_data_PC4_crime.csv", header=TRUE, sep = ",")
   } 
   data <- data %>%  # fill in crime type
-            mutate(pfield = pfieldcrime, 
+            mutate(pfield = pfieldviolent, 
                    interaction = pfield * addrdens,
-                   alpha = alpha_crime,
-                   se = sealpha_crime
+                   alpha = alpha_violent,
+                   se = sealpha_violent
                    ) %>%
                    filter(!is.na(pfield))
   dataindividual <- read.dta(paste0("./Data/hat_any",cr,"2006.dta"))
