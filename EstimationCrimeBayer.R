@@ -24,7 +24,7 @@
   ####################################################
   # Choose crimetype ("crime", "property" or "violent")
   ####################################################
-  cr <- "violent"
+  cr <- "crime"
   ####################################################
   # Choose whether estimation for only the youth
   ####################################################  
@@ -43,10 +43,10 @@
     data <- read.csv("./Data/Thomas_data_PC4_crime.csv", header=TRUE, sep = ",")
   } 
   data <- data %>%  # fill in crime type
-            mutate(pfield = pfieldviolent, 
+            mutate(pfield = pfieldcrime, 
                    interaction = pfield * addrdens,
-                   alpha = alpha_violent,
-                   se = sealpha_violent
+                   alpha = alpha_crime,
+                   se = sealpha_crime
                    ) %>%
                    filter(!is.na(pfield))
   dataindividual <- read.dta(paste0("./Data/hat_any",cr,"2006.dta"))
@@ -67,7 +67,7 @@
     )
   ### New dataset to be used for quantile regression, keep only the missing values
   data_total <- data %>% filter(is.na(alpha))
-  data_total$alpha <- na.fill(data_total$alpha,-3.5)
+  data_total$alpha <- na.fill(data_total$alpha,-0)
   data_total$se <- na.fill(data_total$se, 1)  
   ####################################################
   # Spatial IV--only to check the spatial instrument once.
@@ -162,7 +162,7 @@
     } else { 
       output <- iteration2sls(dataindividual, data, data_total, formcrime, forminit, formhelprq1, formhelprq2, formrq, youth=FALSE, initvalue=1)
       summary(output$iv, diagnostics = TRUE)
-      # summary(output$rqout)
+      summary(output$rqout)
     }
   }
   #####################################################

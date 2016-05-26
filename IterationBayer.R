@@ -140,7 +140,9 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
     # report the implied mean for missing crime rate as requested by referees
   phi <- datatot_temp$hatpc4 - 3.5
   ImpliedCrimeRate <- exp(phi)/(1+exp(phi))
-  print(paste("The implied crime rate for missing neighborhood fixed efffects is:", mean(ImpliedCrimeRate)))
+  print(paste("The minimum mean implied crime rate for missing neighborhood fixed efffects is:", min(ImpliedCrimeRate)))
+  print(paste("The mean implied crime rate for missing neighborhood fixed efffects is:", mean(ImpliedCrimeRate)))
+  print(paste("The maximum implied crime rate for missing neighborhood fixed efffects is:", max(ImpliedCrimeRate)))
   
   datatot$instrinter <- datatot$instrument * datatot$addrdens
   datahat <- bind_rows(datahat, datatot)

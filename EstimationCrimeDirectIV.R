@@ -34,7 +34,7 @@
   ####################################################
   # Choose whether only for municipality averages
   ####################################################   
-  mun <- 1
+  mun <- 0
   ####################################################
   # Read and manipulate data (still manual selection!)
   ####################################################
@@ -170,10 +170,10 @@
   ####################################################
   # make figure
   #####################################################
-  myplot <- makefig(output)
-  pdf("./Paper/Version4/img/equilibriaTemp.pdf")
-  myplot
-  dev.off()
+  # myplot <- makefig(output)
+  # pdf("./Paper/Version4/img/equilibriaTemp.pdf")
+  # myplot
+  # dev.off()
   ####################################################
   # Find all equilibria
   # And other outcome characteristics

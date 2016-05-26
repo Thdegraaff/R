@@ -35,6 +35,7 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
   else {
     dataind$hat1 <- dataind$bfemale*dataind$female + dataind$bforeign*dataind$foreign +  dataind$b_cons + 
       dataind$bcage20cat*dataind$cage20cat + dataind$bcage20cat2*dataind$cage20cat2 
+    dataind$hat1 <- dataind$cage20cat
   }
   ########################################################################################
   # Initialisation of data and OLS
@@ -87,6 +88,9 @@ iteration2sls <- function(dataind, data, datatot, formiv, formols, formrqinst1, 
     datahat_temp <- datahat_temp %>% group_by(pc4) %>% summarize(hatpc4=weighted.mean(hat1,frequency))
     phi <- datahat_temp$hatpc4 + datahat$alphahat_new
     instrument_eq <- exp(phi)/(1+exp(phi))
+    
+    instrument_eq <- datahat_temp$hatpc4
+    
     # We let the instrument converge very slowly to avoid "overshooting"
     # This only happens in the strange situation when gamma is negative 
     # which in our case happens for property crime with neighbourhood variables and the total sample
