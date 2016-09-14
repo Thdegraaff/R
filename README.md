@@ -1,6 +1,8 @@
 # Social-Interaction-and-Crime
 
-Gives R code, example output for the paper **Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhood** and a statement about reproducability. Note that:
+This `GitHub` site provides the R code, some example output and a statement about reproducability for the paper **Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhood** written by Wim Bernasco, Thomas de Graaff, Jan Rouwendal and Wouter Steenbeek to be published in the *Review of Economics and Statistics.
+
+Note that:
 - for privacy reasons the underlying data is not allowed to be published; please contact me for further information if needed;
 - this only provides the code for the second stage estimations and subsequent analyses; first stage estimation is a straightforward (but time-consuming) logit analysis with alternative specific constants.
 - one output file is given for the baseline case which should clarify the type of output and the working of the code.
@@ -22,7 +24,7 @@ The files provided here are:
 
 ## About reproducability & replication
 
-Our paper **Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhood** describes research that utilizes police records of all citizens aged 12 years and older of The Netherlands who have been charged with one or more crimes (felonies as well as misdemeanors). These data contain details (i.e. gender, year of birth, ethnic origin, neighborhood of residence and numbers, years and types of crimes the subjects have ever been charged with).  
+Our paper **Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhood** describes research that utilizes police records of all citizens aged 12 years and older of The Netherlands who have been charged with one or more crimes (felonies as well as misdemeanors). These data contain details (i.e. gender, year of birth, ethnic origin, neighborhood of residence and numbers, years and types of crimes the subjects have ever been charged with).
 
 These are proprietary data that have been obtained from The Netherlands National Police (and with consent of The Netherlands' Ministry of Justice) under an arrangement that strictly precludes their posting. 
 
