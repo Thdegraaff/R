@@ -9,18 +9,26 @@ Note that:
 
 ## Code files provided
 
+### First stage estimation
+
+### Second stage estimation
+
 The files provided here are:
-- `EstimationCrimeBayer.R`: basic the control file as it reads in data and give specifications for OLS, IV and quantile regressions. This script solves for that crime rate for which espilon is zero
-- `EstimationCrimeDirectIV.R`: basic the control file as it reads in data and give specifications for OLS, IV and quantile regressions. This script doesn't solve for the crime rate but fixes it as a pre-specified value (typically 0)
+- `EstimationCrimeBayer.R`: basic control file as it reads in data and give specifications for OLS, IV and quantile regressions. This script solves for that crime rate for which epsilon is zero
+- `EstimationCrimeDirectIV.R`: basic control file as it reads in data and give specifications for OLS, IV and quantile regressions. This script doesn't solve for the crime rate but fixes it as a pre-specified value (typically 0)
 - `IteractionBayer.R`: core code file that calculates the intruments for each neighborhood and for each interation solved for crime rate that specifies epsilon = 0
 - `IteractionDirectIV.R`: core code file that calculates the intruments for each neighborhood and for each interation with crime rate fixed
 - `makefig.R`: Creates neighborhood-specific logit plots (sigmoids);
 - `CharacteristicsEq.R`: provides various characteristics of the equilibria;
 - `FindEquilibria.R`: finds all equilibria (1 or 3) for each neighborhood and iteration;
+- `ReadGeneralData.R`: Code to read in the dataset (very specific for this set-up)
+
+### Example code and outputExample
+
+Markdown file with `html` and `pdf` example output:
 - `OutputExample.Rmd`: `R` markdown file combining code and output;
 - `OutputExample.html`: Example code and output in `html`;
 - `OutputExample.pfd`: Example code and output in `pfd`.
-- `ReadGeneralData.R`: Code to read in the dataset (very specific for this set-up)
 
 ## About reproducability & replication
 
