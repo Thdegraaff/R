@@ -32,10 +32,16 @@ Our paper **Social Interactions and Crime Revisited: An Investigation Using Indi
 
 For further information and for requests to be granted access to the data, please contact:
 
-Wim Bernasco 
+Wim Bernasco
+
 Netherlands Institute for the Study of Crime and Law Enforcement (NSCR)
+
 Postal address: P.O. Box 71304, 1008 BH Amsterdam, The Netherlands
+
 Visiting address: De Boelelaan 1077a, (entrance Buitenveldertselaan), 1081 HV Amsterdam, The Netherlands
+
 Phone: +31 (0)20 598 5239
+
 Fax: +31 (0)20 598 3975
-Email: [wbernasco@nscr.nl](wbernasco@nscr.nl)
+
+Email: [mailto:wbernasco@nscr.nl](wbernasco@nscr.nl)
