@@ -1,6 +1,6 @@
 # Social-Interaction-and-Crime
 
-This `GitHub` site provides the `Stata` and `R`` code, some example output using the second stage `R` code and a statement about reproducability for the paper **Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhood** written by Wim Bernasco, Thomas de Graaff, Jan Rouwendal and Wouter Steenbeek to be published in the *Review of Economics and Statistics.
+This `GitHub` site provides the `Stata` and `R` code, some example output using the second stage `R` code and a statement about reproducability for the paper **Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhood** written by Wim Bernasco, Thomas de Graaff, Jan Rouwendal and Wouter Steenbeek to be published in the *Review of Economics and Statistics.
 
 Note that:
 - for privacy reasons the underlying data is not allowed to be published; please contact Wim Bernasco (contact details below) for further information if needed;
