@@ -44,7 +44,8 @@ The files provided here are:
 - `makefig.R`: Creates neighborhood-specific logit plots (sigmoids);
 - `CharacteristicsEq.R`: provides various characteristics of the equilibria;
 - `FindEquilibria.R`: finds all equilibria (1 or 3) for each neighborhood and iteration;
-- `ReadGeneralData.R`: Code to read in the dataset (very specific for this set-up).
+- `ReadGeneralData.R`: code to read in the dataset (very specific for this set-up)
+- `CODEBOOK_NEIGHBORHOODVARIABLES.md`: variables and definitions to be used in the second stage.
 
 ### Example code and outputExample
 
