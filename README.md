@@ -4,7 +4,7 @@ This `GitHub` site provides the `Stata` and `R` code for the first stage estimat
 
 ## About reproducability & replication
 
-Our paper **Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhood** describes research that utilizes police records of all citizens aged 12 years and older of The Netherlands who have been charged with one or more crimes (felonies as well as misdemeanors). These data contain details (i.e. gender, year of birth, ethnic origin, neighborhood of residence and numbers, years and types of crimes the subjects have ever been charged with). This paper has been exempted from the data requirement of the *Journal of Economics and Statistics* on the basis of the following statement.
+Our paper **Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhood** describes research that utilizes police records of all citizens aged 12 years and older of The Netherlands who have been charged with one or more crimes (felonies as well as misdemeanors). These data contain details (i.e. gender, year of birth, ethnic origin, neighborhood of residence and numbers, years and types of crimes the subjects have ever been charged with). This paper has been exempted from the data requirement of the *Review of Economics and Statistics* on the basis of the following statement.
 
 >These are proprietary data that have been obtained from The Netherlands National Police (and with consent of The Netherlands' Ministry of Justice) under an arrangement that strictly precludes their posting. 
 
