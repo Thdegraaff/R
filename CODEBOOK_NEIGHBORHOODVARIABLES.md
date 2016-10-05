@@ -4,6 +4,7 @@ All variables are per neighborhood (Dutch 4-digit level)
 
 | tot_hh | Definition |
 |--------|------------|
+| tot_bev | Total popoulation |
 | opptotaalhectare | Total surface area in hectares |
 | scholenbasisonderwijsper10000inw | Number of elementary schools per 10,000 inhabitants|
 | percentagehuurtoeslagontvangersh | Percent population under rent control| 
@@ -37,3 +38,10 @@ All variables are per neighborhood (Dutch 4-digit level)
 | l85_90jaar | Population between 85 and 90 years old |
 | l90_95jaar | Population between 90 and 95 years old |
 | l95ofouder | Population older dan 95 years old |
+| education | Mean educational level |
+| socclass | Mean social class |
+| k_tweeverd | Mean percentage two-earner households |
+| v_uit_perc | Percentage out-migration rate |
+| v_in_perc | Percentage in-migration rate | 
+| polavail_mean_2005 | Mean availability of police |
+| 
