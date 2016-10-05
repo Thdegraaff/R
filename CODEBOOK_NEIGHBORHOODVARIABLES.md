@@ -15,8 +15,8 @@ All variables are per neighborhood (Dutch 4-digit level)
 | w_alloch  | Number of western immigrants | 
 | nw_alloch | Number of non-western immigrants |
 | verkooppuntentotaalwinkels | Number of shops | 
-| persperhh | average size of household |  
-| eenpersoon | number of single person households |
+| persperhh | Average size of household |  
+| eenpersoon | Number of single person households |
 | Eenouder | Number of one parent households |
 | l0_5jaar | Population below 5 years old |
 | l5_10jaar | Population between 5 and 10 years old |
