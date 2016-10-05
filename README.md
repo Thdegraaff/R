@@ -4,7 +4,7 @@ This `GitHub` site provides the `Stata` and `R` code for the first stage estimat
 
 ## About reproducability & replication
 
-Our paper **Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhood** describes research that utilizes police records of all citizens aged 12 years and older of The Netherlands who have been charged with one or more crimes (felonies as well as misdemeanors). These data contain details (i.e. gender, year of birth, ethnic origin, neighborhood of residence and numbers, years and types of crimes the subjects have ever been charged with). This paper has been exempted from the data requirement of the *Review of Economics and Statistics* on the basis of the following statement.
+Our paper **Social Interactions and Crime Revisited: An Investigation Using Individual Offender Data in Dutch Neighborhood** describes research that utilizes police records of all citizens aged 12 years and older of The Netherlands who have been charged with one or more crimes (felonies as well as misdemeanors). These data contain details (i.e., gender, year of birth, ethnic origin, neighborhood of residence and numbers, years and types of crimes the subjects have ever been charged with). This paper has been exempted from the data requirement of the *Review of Economics and Statistics* on the basis of the following statement.
 
 >These are proprietary data that have been obtained from The Netherlands National Police (and with consent of The Netherlands' Ministry of Justice) under an arrangement that strictly precludes their posting. 
 
@@ -25,26 +25,26 @@ Email: [wbernasco@nscr.nl](mailto:wbernasco@nscr.nl)
 ### First stage estimation
 
 The files provided here are:
-- `RESTAT_Phase1_AllAges.do`: Stata do file for the first stage of the model estimation (All ages version)
-- `RESTAT_Phase1_Youth.do`: Stata do file for the first stage of the model estimation (Youth version)
-- `SpatialLagConstructionViolentProperty2006_AllAges.R`: R file to construct spatial lags (All ages version. Note that in the final version of the paper spatial lags are not used anymore.)
-- `SpatialLagConstructionViolentProperty2006_Youth.R`: R file to construct spatial lags (Youth version. Note that in the final version of the paper spatial lags are not used anymore.)
-- `CODEBOOK_NL_OFFENDERS_2006_PC4.txt`: Text file explaining the variables used in the first stage
-- `DataForSecondStage`: Folder giving the output dataset of the first stage, which is in combination with other (proprietary data) to be used in the second stage
-- `ShapeFiles`: Folder giving the shape and associated files to depict the used Dutch neighborhoods
+- `RESTAT_Phase1_AllAges.do`: Stata do file for the first stage of the model estimation (All ages version);
+- `RESTAT_Phase1_Youth.do`: Stata do file for the first stage of the model estimation (Youth version);
+- `SpatialLagConstructionViolentProperty2006_AllAges.R`: R file to construct spatial lags (All ages version. Note that in the final version of the paper spatial lags are not used anymore.);
+- `SpatialLagConstructionViolentProperty2006_Youth.R`: R file to construct spatial lags (Youth version. Note that in the final version of the paper spatial lags are not used anymore.);
+- `CODEBOOK_NL_OFFENDERS_2006_PC4.txt`: Text file explaining the variables used in the first stage;
+- `DataForSecondStage`: Folder giving the output dataset of the first stage, which is in combination with other (proprietary) data to be used in the second stage;
+- `ShapeFiles`: Folder giving the shape and associated files to depict the used Dutch neighborhoods.
 
 
 ### Second stage estimation
 
 The files provided here are:
-- `EstimationCrimeBayer.R`: basic control file as it reads in data and give specifications for OLS, IV and quantile regressions. This script solves for that crime rate for which epsilon is zero
-- `EstimationCrimeDirectIV.R`: basic control file as it reads in data and give specifications for OLS, IV and quantile regressions. This script doesn't solve for the crime rate but fixes it as a pre-specified value (typically 0)
-- `IteractionBayer.R`: core code file that calculates the intruments for each neighborhood and for each interation solved for crime rate that specifies epsilon = 0
-- `IteractionDirectIV.R`: core code file that calculates the intruments for each neighborhood and for each interation with crime rate fixed
+- `EstimationCrimeBayer.R`: basic control file as it reads in data and give specifications for OLS, IV and quantile regressions. This script solves for that crime rate for which epsilon is zero;
+- `EstimationCrimeDirectIV.R`: basic control file as it reads in data and give specifications for OLS, IV and quantile regressions. This script doesn't solve for the crime rate but fixes it as a pre-specified value (typically 0);
+- `IteractionBayer.R`: core code file that calculates the intruments for each neighborhood and for each interation solved for crime rate that specifies epsilon = 0;
+- `IteractionDirectIV.R`: core code file that calculates the intruments for each neighborhood and for each interation with crime rate fixed;
 - `makefig.R`: Creates neighborhood-specific logit plots (sigmoids);
 - `CharacteristicsEq.R`: provides various characteristics of the equilibria;
 - `FindEquilibria.R`: finds all equilibria (1 or 3) for each neighborhood and iteration;
-- `ReadGeneralData.R`: Code to read in the dataset (very specific for this set-up)
+- `ReadGeneralData.R`: Code to read in the dataset (very specific for this set-up).
 
 ### Example code and outputExample
 
